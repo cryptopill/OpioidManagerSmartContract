@@ -9,16 +9,16 @@ import json
 from flask import Flask, render_template
 from ethjsonrpc import EthJsonRpc
 
-contractAddr = u'0x5a40cd0d658c1faf21c360fc28d1e05b3b965df1'
+contractAddr = u'0x9ff504e9f773c57cd7cf602752bd8bbb83b77c6f'
 
 c = EthJsonRpc('127.0.0.1',8545)
 
-patient_1 = 0x5344371f4112044b1569aa27cc2dc16907ed13e2
-patient_2 = 0x20de0ee3af7f1518a8ea5a70245d4d3e4b35ea18
-patient_3 = 0xc8ae542b18d1b30485de68864198ea70069869ec
-pharma_1 = 0x39eabe3b2546a00ff3f3f1014c73e7a3deef0030
-pharma_2 = 0x030d092ab95c2557192706aa093019e9c81be0cf
-pharma_3 = 0x93015b135470a3d5c5e840b2822753fde7424918
+patient_1 = 0xb872047bb1763414f63f577590ed75565f368ddd
+patient_2 = 0x30aeca74198075c69dd8e54bad929d9eb6725536
+patient_3 = 0xf348a8ba3475edd24531c077320559645c1fb019
+pharma_1 = 0xb791bd701dcc9ca36658f978adc9dd1a8fc1b133
+pharma_2 = 0xae7f58377b9a1f81b41b6efcf25099c6678be3a9
+pharma_3 = 0xc1af3283bddd6b8685e404bb5b6efadeeacd1d25
 
 def createPrescription(name, doi, capsules, density, patientaddr):
     tx = c.call_with_transaction(c.eth_coinbase(), contractAddr, 'createPrescription(string,string,uint8,uint8,address)', [name,doi,capsules,density,patientaddr], gas=1000000)
@@ -72,6 +72,14 @@ def getPatientLatestPrescriptionHash(patientaddr):
     results = c.call(contractAddr, 'getPatientLatestPrescriptionHash(address)', [patientaddr], ['bytes32'])
     return results
 
+def getPatientPrescriptionName(patientaddr, num):
+    results = c.call(contractAddr, 'getPatientPrescriptionName(address,uint256)', [patientaddr, num], ['string'])
+    return results
+
+def getPatientPrescriptionDOI(patientaddr, num):
+    results = c.call(contractAddr, 'getPatientPrescriptionDOI(address,uint256)', [patientaddr, num], ['string'])
+    return results
+
 sio = socketio.Server()
 app = Flask(__name__)
 
@@ -112,16 +120,18 @@ def connect(sid, environ):
     # temp2 = generateAlgebraQuestion()
     # print(temp2)
     print('get req');
-    Patient1 = {'address' : str(patient_1),
+    Patients =  [{'address' : str(patient_1),
                 'name': str(getPatientName(patient_1)),
                 'num_prescriptions': str(getPrescriptionCount(patient_1)),
                 'medicines': [
                         {
-                        'name': "Opioid",
+                        'name': str(getPatientPrescriptionName(patient_1,1)),
                         'patientAddress': str(patient_1),
                         'medAddress': repr(getLatestPrescription()),
                         'capsules': str(getPatientPrescriptionCapsules(patient_1,1)),
-                        'density': str(getPatientPrescriptionDensity(patient_1,1))
+                        'density': str(getPatientPrescriptionDensity(patient_1,1)),
+                        'doi': str(getPatientPrescriptionDOI(patient_1,1)),
+
                         },
                         {
                         'name': "Opioid",
@@ -131,13 +141,58 @@ def connect(sid, environ):
                         'density': str(getPatientPrescriptionDensity(patient_1,1))
                         }
                             ]
+                },
+                {'address' : str(patient_2),
+                'name': str(getPatientName(patient_2)),
+                'num_prescriptions': str(getPrescriptionCount(patient_2)),
+                'medicines': [
+                        {
+                        'name': str(getPatientPrescriptionName(patient_2,1)),
+                        'patientAddress': str(patient_2),
+                        'medAddress': repr(getLatestPrescription()),
+                        'capsules': str(getPatientPrescriptionCapsules(patient_2,1)),
+                        'density': str(getPatientPrescriptionDensity(patient_2,1)),
+                        'doi': str(getPatientPrescriptionDOI(patient_2,1)),
+
+                        },
+                        {
+                        'name': "Opioid",
+                        'patientAddress': str(patient_2),
+                        'medAddress': repr(getLatestPrescription()),
+                        'capsules': str(getPatientPrescriptionCapsules(patient_2,1)),
+                        'density': str(getPatientPrescriptionDensity(patient_2,1))
+                        }
+                        ]
+                },
+                {'address' : str(patient_3),
+                'name': str(getPatientName(patient_3)),
+                'num_prescriptions': str(getPrescriptionCount(patient_3)),
+                'medicines': [
+                        {
+                        'name': str(getPatientPrescriptionName(patient_3,1)),
+                        'patientAddress': str(patient_3),
+                        'medAddress': repr(getLatestPrescription()),
+                        'capsules': str(getPatientPrescriptionCapsules(patient_3,1)),
+                        'density': str(getPatientPrescriptionDensity(patient_3,1)),
+                        'doi': str(getPatientPrescriptionDOI(patient_3,1)),
+
+                        },
+                        {
+                        'name': "Opioid",
+                        'patientAddress': str(patient_3),
+                        'medAddress': repr(getLatestPrescription()),
+                        'capsules': str(getPatientPrescriptionCapsules(patient_3,1)),
+                        'density': str(getPatientPrescriptionDensity(patient_3,1))
+                        }
+                        ]
                 }
-    print(Patient1);
-    json_data = json.dumps(Patient1);
-    print(json_data);
+                ]
+# print(Patients);
+# json_data = json.dumps(Patients);
+# print(json_data);
         # Patient2 =  {}
-    data = []
-    sio.emit('', "temp2")
+# data = []
+    sio.emit('patientlists', Patients)
 
     # print("connect ", sid)
     # print("environ ", environ);
