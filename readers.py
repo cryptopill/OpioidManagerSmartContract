@@ -1,7 +1,15 @@
 #must use python2
 from ethjsonrpc import EthJsonRpc
 import pprint
+<<<<<<< HEAD
 contractAddr = u'0x1a4103ce4b02c2799e6c77b5e50c86f592ad3310'
+=======
+<<<<<<< HEAD
+contractAddr = u'0x66f619c637074b34449a095fa0177f29828c228c'
+=======
+contractAddr = u'0x88f1b3a6161deb8df8d05dfe612130c738bc57f7'
+>>>>>>> d534c49249aa1217add99369fd3264a49c1991f0
+>>>>>>> 99e7791b9af2dfbc29eaa7baa631c65cd5bc2044
 
 c = EthJsonRpc('127.0.0.1',8545)
 
@@ -66,6 +74,7 @@ def getPatientLatestPrescriptionHash(patientaddr):
     results = c.call(contractAddr, 'getPatientLatestPrescriptionHash(address)', [patientaddr], ['bytes32'])
     return results
 
+<<<<<<< HEAD
 """
 Patient_1 = {}
 Patient_1["address"] = patient_1
@@ -91,6 +100,12 @@ print Patients
 
 
 
+=======
+<<<<<<< HEAD
+
+=======
+>>>>>>> d534c49249aa1217add99369fd3264a49c1991f0
+>>>>>>> 99e7791b9af2dfbc29eaa7baa631c65cd5bc2044
 print "name: " + str(getPatientName(patient_1))
 print "number of prescriptions: " + str(getPrescriptionCount(patient_1))
 print "registered?: " + str(getPatientRegistered(patient_1))
