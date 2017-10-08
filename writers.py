@@ -1,6 +1,6 @@
 #must use python2
 from ethjsonrpc import EthJsonRpc
-contractAddr = u'0xa101b4b36817607718fa7768ca23b305077715ec'
+contractAddr = u'0x66f619c637074b34449a095fa0177f29828c228c'
 
 c = EthJsonRpc('127.0.0.1',8545)
 
