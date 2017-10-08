@@ -1,7 +1,7 @@
 #must use python2
 from ethjsonrpc import EthJsonRpc
 import pprint
-contractAddr = u'0x88f1b3a6161deb8df8d05dfe612130c738bc57f7'
+contractAddr = u'0x1a4103ce4b02c2799e6c77b5e50c86f592ad3310'
 
 c = EthJsonRpc('127.0.0.1',8545)
 
@@ -36,6 +36,16 @@ def getPatientPrescriptionCapsules(patientaddr, num):
     results = c.call(contractAddr, 'getPatientPrescriptionCapsules(address,uint256)', [patientaddr, num], ['uint8'])
     return results
 
+#NEW
+def getPatientPrescriptionName(patientaddr, num):
+    results = c.call(contractAddr, 'getPatientPrescriptionName(address,uint256)', [patientaddr, num], ['string'])
+    return results
+
+#NEW
+def getPatientPrescriptionDOI(patientaddr, num):
+    results = c.call(contractAddr, 'getPatientPrescriptionDOI(address,uint256)', [patientaddr, num], ['string'])
+    return results
+
 def getPatientPrescriptionDensity(patientaddr, num):
     results = c.call(contractAddr, 'getPatientPrescriptionDensity(address,uint256)', [patientaddr, num], ['uint8'])
     return results
@@ -56,10 +66,37 @@ def getPatientLatestPrescriptionHash(patientaddr):
     results = c.call(contractAddr, 'getPatientLatestPrescriptionHash(address)', [patientaddr], ['bytes32'])
     return results
 
+"""
+Patient_1 = {}
+Patient_1["address"] = patient_1
+Patient_1["name"] = getPatientName(patient_1)
+Patient_1["num-prescriptions"] = getPrescriptionCount(patient_1)
+Patient_1["medicines"] = [];
+
+
+Patient_2 = {}
+Patient_2["address"] = patient_2
+Patient_2["name"] = getPatientName(patient_2)
+Patient_2["num-prescriptions"] = getPrescriptionCount(patient_2)
+
+Patient_3 = {}
+Patient_3["address"] = patient_3
+Patient_3["name"] = getPatientName(patient_3)
+Patient_3["num-prescriptions"] = getPrescriptionCount(patient_3)
+
+Patients = [Patient_1, Patient_2, Patient_3]
+
+print Patients
+
+
+
+
 print "name: " + str(getPatientName(patient_1))
 print "number of prescriptions: " + str(getPrescriptionCount(patient_1))
 print "registered?: " + str(getPatientRegistered(patient_1))
 print "last prescription" + str(getPatientLatestPrescriptionHash(patient_1))
+print "prescription 1 name: " + str(getPatientPrescriptionName(patient_1, 1))
+print "prescription 1 doi: " + str(getPatientPrescriptionDOI(patient_1, 1))
 print "prescription 1 density: " + str(getPatientPrescriptionDensity(patient_1, 1))
 print "prescription 1 capsules: " + str(getPatientPrescriptionCapsules(patient_1, 1))
 print'\n'
@@ -68,6 +105,8 @@ print "name: " + str(getPatientName(patient_2))
 print "number of prescriptions: " + str(getPrescriptionCount(patient_2))
 print "registered?: " + str(getPatientRegistered(patient_2))
 print "last prescription" + str(getPatientLatestPrescriptionHash(patient_2))
+print "prescription 1 name: " + str(getPatientPrescriptionName(patient_2, 1))
+print "prescription 1 doi: " + str(getPatientPrescriptionDOI(patient_2, 1))
 print "prescription 1 density: " + str(getPatientPrescriptionDensity(patient_2, 1))
 print "prescription 1 capsules: " + str(getPatientPrescriptionCapsules(patient_2, 1))
 print'\n'
@@ -76,9 +115,12 @@ print "name: " + str(getPatientName(patient_3))
 print "number of prescriptions: " + str(getPrescriptionCount(patient_3))
 print "registered?: " + str(getPatientRegistered(patient_3))
 print "last prescription" + str(getPatientLatestPrescriptionHash(patient_3))
+print "prescription 1 name: " + str(getPatientPrescriptionName(patient_3, 1))
+print "prescription 1 doi: " + str(getPatientPrescriptionDOI(patient_3, 1))
 print "prescription 1 density: " + str(getPatientPrescriptionDensity(patient_3, 1))
 print "prescription 1 capsules: " + str(getPatientPrescriptionCapsules(patient_3, 1))
 print'\n'
 
 print "latest prescription: " + str(getLatestPrescription())
 print "total prescriptions: " + str(getTotalPrescriptionCount())
+"""

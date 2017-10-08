@@ -1,6 +1,6 @@
 #must use python2
 from ethjsonrpc import EthJsonRpc
-contractAddr = u'0x88f1b3a6161deb8df8d05dfe612130c738bc57f7'
+contractAddr = u'0x1a4103ce4b02c2799e6c77b5e50c86f592ad3310'
 
 c = EthJsonRpc('127.0.0.1',8545)
 
@@ -19,5 +19,5 @@ def distributePrescription(prescriptionaddr, patientaddr, pharmaaddr):
     tx = c.call_with_transaction(c.eth_coinbase(), contractAddr, 'distributePrescription(bytes32,address)', [prescriptionaddr,patientaddr], gas=1000000)
     print tx
 
-createPrescription('Literally Methfiafsd','20/12/2017',40,12,patient_2)
-distributePrescription('\xff\x07\x7f\x8c\x91;=\xab\xef\x95E\x12\xeeD1\x7fR\x8f\x19O\xbe?t\xdf\xa7c\x81\x7fE\xee \x8d',patient_2,pharma_2)
+#createPrescription('Adreal','20/12/2017',35,12,patient_1)
+#distributePrescription('4*?\xe2\xfe\xfeJ-\x92\tp\xd4R\xc4\x12>\xddL\xacan\xd2\x93Xk\xef,\x1cL\xdaRA',patient_1,pharma_2)

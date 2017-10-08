@@ -7,11 +7,9 @@ contract OpioidManager{
   }
 
   mapping(address => Pharma) public pharmas;
-
   function registerPharma(address _addr){
     pharmas[_addr] = Pharma({registered: true});
   }
-
   //structure of an opioid prescription
   struct MedicinePrescription{
     string name;
@@ -53,6 +51,7 @@ contract OpioidManager{
   //only callable by pharmacists
   function distributePrescription(bytes32 _prescription_addr, address _patient){
     //return true and add the prescription to the patients received prescriptions
+    //assert(pharmas[msg.sender].registered);
     if(prescriptions[_prescription_addr].patient == _patient){
       prescriptions[_prescription_addr].distributed = true;
       patients[_patient].prescription_count++;
@@ -77,6 +76,13 @@ contract OpioidManager{
     return prescriptions[_prescription_addr].distributed;
   }
 
+  function getPrescriptionName(bytes32 _prescription_addr) constant returns(string){
+      return prescriptions[_prescription_addr].name;
+  }
+
+  function getPrescriptionDOI(bytes32 _prescription_addr) constant returns(string){
+    return prescriptions[_prescription_addr].doi;
+  }
   struct Patient{
     string name;
     bool registered;
@@ -114,6 +120,14 @@ contract OpioidManager{
   //Works
   function getPatientPrescriptionDensity(address _address, uint256 _num) constant returns(uint8){
     return getDensity(patients[_address].prescriptions[_num]);
+  }
+
+  function getPatientPrescriptionName(address _address, uint256 _num) constant returns(string){
+    return getPrescriptionName(patients[_address].prescriptions[_num]);
+  }
+
+  function getPatientPrescriptionDOI(address _address, uint256 _num) constant returns(string){
+    return getPrescriptionDOI(patients[_address].prescriptions[_num]);
   }
 
   //Works
