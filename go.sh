@@ -26,5 +26,20 @@ var opioidAddress = eth.getTransactionReceipt(opioidInstance.transactionHash).co
 
 opioidAddress
 
+//now register 3 patients accounts 1,2,3
+
+
+var opioidManagerContract = eth.contract(JSON.parse(opioidContractAbi))
+
+var opioidManager = opioidManagerContract.at(opioidAddress)
+
+opioidManager.registerPatient.sendTransaction(eth.accounts[1], "Carlo Supina",{from: eth.accounts[0], gas: 1000000})
+
+opioidManager.registerPatient.sendTransaction(eth.accounts[2], "Nathaniel Young",{from: eth.accounts[0], gas: 1000000})
+
+opioidManager.registerPatient.sendTransaction(eth.accounts[3], "AungKaung Myat",{from: eth.accounts[0], gas: 1000000})
+
+opioidManager.getPatientName.call(eth.accounts[1])
+
 EOF
 
