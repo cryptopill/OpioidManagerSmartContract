@@ -1,24 +1,18 @@
 #must use python2
 from ethjsonrpc import EthJsonRpc
 import pprint
-<<<<<<< HEAD
-contractAddr = u'0x1a4103ce4b02c2799e6c77b5e50c86f592ad3310'
-=======
-<<<<<<< HEAD
-contractAddr = u'0x66f619c637074b34449a095fa0177f29828c228c'
-=======
-contractAddr = u'0x88f1b3a6161deb8df8d05dfe612130c738bc57f7'
->>>>>>> d534c49249aa1217add99369fd3264a49c1991f0
->>>>>>> 99e7791b9af2dfbc29eaa7baa631c65cd5bc2044
+
+contractAddr = u'0x9ff504e9f773c57cd7cf602752bd8bbb83b77c6f'
+
 
 c = EthJsonRpc('127.0.0.1',8545)
 
-patient_1 = 0x3a4657f075c19812ab943f91429c6c6a6efafe88
-patient_2 = 0xe3938d687831473386eb046fc6c194f7288c74ab
-patient_3 = 0x4ad9974ae37ebf733fda2a9e3b994c354581f520
-pharma_1 = 0xa190c7ca6d8f875aec1ae27e452ebfbf8c44e254
-pharma_2 = 0x15eef446813c1a2b96d56e80143835cfe1f67b54
-pharma_3 = 0x92569be733b0b5a94e43dace73c6c1adfe4f956d
+patient_1 = 0xb872047bb1763414f63f577590ed75565f368ddd
+patient_2 = 0x30aeca74198075c69dd8e54bad929d9eb6725536
+patient_3 = 0xf348a8ba3475edd24531c077320559645c1fb019
+pharma_1 = 0xb791bd701dcc9ca36658f978adc9dd1a8fc1b133
+pharma_2 = 0xae7f58377b9a1f81b41b6efcf25099c6678be3a9
+pharma_3 = 0xc1af3283bddd6b8685e404bb5b6efadeeacd1d25
 
 def bytes32tostring(results):
     s = pprint.pformat(results)
@@ -74,8 +68,8 @@ def getPatientLatestPrescriptionHash(patientaddr):
     results = c.call(contractAddr, 'getPatientLatestPrescriptionHash(address)', [patientaddr], ['bytes32'])
     return results
 
-<<<<<<< HEAD
-"""
+
+
 Patient_1 = {}
 Patient_1["address"] = patient_1
 Patient_1["name"] = getPatientName(patient_1)
@@ -97,15 +91,6 @@ Patients = [Patient_1, Patient_2, Patient_3]
 
 print Patients
 
-
-
-
-=======
-<<<<<<< HEAD
-
-=======
->>>>>>> d534c49249aa1217add99369fd3264a49c1991f0
->>>>>>> 99e7791b9af2dfbc29eaa7baa631c65cd5bc2044
 print "name: " + str(getPatientName(patient_1))
 print "number of prescriptions: " + str(getPrescriptionCount(patient_1))
 print "registered?: " + str(getPatientRegistered(patient_1))
@@ -138,4 +123,3 @@ print'\n'
 
 print "latest prescription: " + str(getLatestPrescription())
 print "total prescriptions: " + str(getTotalPrescriptionCount())
-"""
