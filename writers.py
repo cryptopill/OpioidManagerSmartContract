@@ -1,7 +1,15 @@
 #must use python2
 from ethjsonrpc import EthJsonRpc
+<<<<<<< HEAD
+contractAddr = u'0x1a4103ce4b02c2799e6c77b5e50c86f592ad3310'
+=======
 
+<<<<<<< HEAD
 contractAddr = u'0x5a40cd0d658c1faf21c360fc28d1e05b3b965df1'
+=======
+contractAddr = u'0x88f1b3a6161deb8df8d05dfe612130c738bc57f7'
+>>>>>>> 99e7791b9af2dfbc29eaa7baa631c65cd5bc2044
+>>>>>>> f35dca715bde000ee2c70ca2a42f10989cdb5d06
 
 c = EthJsonRpc('127.0.0.1',8545)
 
@@ -20,5 +28,10 @@ def distributePrescription(prescriptionaddr, patientaddr, pharmaaddr):
     tx = c.call_with_transaction(c.eth_coinbase(), contractAddr, 'distributePrescription(bytes32,address)', [prescriptionaddr,patientaddr], gas=1000000)
     print tx
 
+<<<<<<< HEAD
 # createPrescription('Literally Methfiafsd','20/12/2017',30,16,patient_3)
 distributePrescription('\xfeSsi\xfb\xcb\xbf\x9a\x0c\xa4\xe5\x1c\xfbQM\x94\xb1\x94R\x90\xa7V);G\xf1^\x03\xa9\xc4\xfeQ',patient_3,pharma_2)
+=======
+#createPrescription('Adreal','20/12/2017',35,12,patient_1)
+#distributePrescription('4*?\xe2\xfe\xfeJ-\x92\tp\xd4R\xc4\x12>\xddL\xacan\xd2\x93Xk\xef,\x1cL\xdaRA',patient_1,pharma_2)
+>>>>>>> f35dca715bde000ee2c70ca2a42f10989cdb5d06
