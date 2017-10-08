@@ -16,7 +16,7 @@ var opioidContract = eth.contract(JSON.parse(opioidContractAbi))
 
 var opioidCode = "0x" + opioidOutput.contracts['OpioidManager.sol:OpioidManager'].bin
 
-var deployOpioidContract = {from: eth.accounts[0], data: opioidCode, gas: 1000000}
+var deployOpioidContract = {from: eth.accounts[0], data: opioidCode, gas: 1500000}
 
 var opioidInstance = opioidContract.new(deployOpioidContract)
 
@@ -39,7 +39,9 @@ opioidManager.registerPatient.sendTransaction(eth.accounts[2], "Nathaniel Young"
 
 opioidManager.registerPatient.sendTransaction(eth.accounts[3], "AungKaung Myat",{from: eth.accounts[0], gas: 1000000})
 
-opioidManager.getPatientName.call(eth.accounts[1])
+opioidManager.registerPharma.sendTransaction(eth.accounts[4], "Gordon Ramsay",{from: eth.accounts[0], gas: 1000000})
+opioidManager.registerPharma.sendTransaction(eth.accounts[5], "A living fidget spinner",{from: eth.accounts[0], gas: 1000000})
+opioidManager.registerPharma.sendTransaction(eth.accounts[6], "Vishnu",{from: eth.accounts[0], gas: 1000000})
 
 EOF
 
