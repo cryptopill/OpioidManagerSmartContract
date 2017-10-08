@@ -51,7 +51,7 @@ def connect(sid, environ):
     # print(temp)
     # sio.emit('reply', "temp")
 
-@sio.on('questions2', namespace='/')
+@sio.on('registerPre', namespace='/')
 def connect(sid, environ):
 
     # print('here')

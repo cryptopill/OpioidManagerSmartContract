@@ -1,13 +1,20 @@
 #must use python2
 from ethjsonrpc import EthJsonRpc
 import pprint
+<<<<<<< HEAD
 contractAddr = u'0x66f619c637074b34449a095fa0177f29828c228c'
+=======
+contractAddr = u'0x88f1b3a6161deb8df8d05dfe612130c738bc57f7'
+>>>>>>> d534c49249aa1217add99369fd3264a49c1991f0
 
 c = EthJsonRpc('127.0.0.1',8545)
 
 patient_1 = 0x3a4657f075c19812ab943f91429c6c6a6efafe88
 patient_2 = 0xe3938d687831473386eb046fc6c194f7288c74ab
 patient_3 = 0x4ad9974ae37ebf733fda2a9e3b994c354581f520
+pharma_1 = 0xa190c7ca6d8f875aec1ae27e452ebfbf8c44e254
+pharma_2 = 0x15eef446813c1a2b96d56e80143835cfe1f67b54
+pharma_3 = 0x92569be733b0b5a94e43dace73c6c1adfe4f956d
 
 def bytes32tostring(results):
     s = pprint.pformat(results)
@@ -18,6 +25,7 @@ def bytes32tostring(results):
         s = s.replace(c, '')
 
     return '0x'+s
+
 
 def getPatientName(patientaddr):
     results = c.call(contractAddr, 'getPatientName(address)', [patientaddr], ['string'])
@@ -38,7 +46,7 @@ def getPatientPrescriptionDensity(patientaddr, num):
 
 def getLatestPrescription():
     results = c.call(contractAddr, 'getLatestPrescription()', [], ['bytes32'])
-    return bytes32tostring(results)
+    return results
 
 def getTotalPrescriptionCount():
     results = c.call(contractAddr, 'getTotalPrescriptionCount()', [], ['uint256'])
@@ -50,9 +58,12 @@ def getPatientRegistered(patientaddr):
 
 def getPatientLatestPrescriptionHash(patientaddr):
     results = c.call(contractAddr, 'getPatientLatestPrescriptionHash(address)', [patientaddr], ['bytes32'])
-    return bytes32tostring(results)
+    return results
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> d534c49249aa1217add99369fd3264a49c1991f0
 print "name: " + str(getPatientName(patient_1))
 print "number of prescriptions: " + str(getPrescriptionCount(patient_1))
 print "registered?: " + str(getPatientRegistered(patient_1))

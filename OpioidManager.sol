@@ -2,6 +2,16 @@ pragma solidity ^0.4.2;
 
 contract OpioidManager{
 
+  struct Pharma{
+    bool registered;
+  }
+
+  mapping(address => Pharma) public pharmas;
+
+  function registerPharma(address _addr){
+    pharmas[_addr] = Pharma({registered: true});
+  }
+
   //structure of an opioid prescription
   struct MedicinePrescription{
     string name;
@@ -30,6 +40,7 @@ contract OpioidManager{
   }
 
   //WORKS
+  //this is the qr code that is generated
   function getLatestPrescription() constant returns (bytes32){
     return prescription_hashes[prescription_count];
   }
@@ -109,5 +120,7 @@ contract OpioidManager{
   function getPatientLatestPrescriptionHash(address _address) constant returns (bytes32){
     return patients[_address].prescriptions[patients[_address].prescription_count];
   }
+
+  
 
 }
