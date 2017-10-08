@@ -52,7 +52,7 @@ contract OpioidManager{
   function distributePrescription(bytes32 _prescription_addr, address _patient){
     //return true and add the prescription to the patients received prescriptions
     //assert(pharmas[msg.sender].registered);
-    if(prescriptions[_prescription_addr].patient == _patient){
+    if(prescriptions[_prescription_addr].patient == _patient && !prescriptions[_prescription_addr].distributed){
       prescriptions[_prescription_addr].distributed = true;
       patients[_patient].prescription_count++;
       patients[_patient].prescriptions[patients[_patient].prescription_count] = _prescription_addr;
